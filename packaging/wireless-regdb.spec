@@ -6,6 +6,7 @@ Summary:        Linux wireless regulatory database
 Url:            http://wireless.kernel.org/en/developers/Regulatory/
 Group:          System/Base
 Source:         http://wireless.kernel.org/download/wireless-regdb/wireless-regdb-%{version}.tar.xz
+Source1001: 	wireless-regdb.manifest
 Requires:       python
 BuildArch:      noarch
 
@@ -19,6 +20,7 @@ http://wireless.kernel.org/en/developers/Regulatory/
 
 %prep
 %setup -q
+cp %{SOURCE1001} .
 
 %build
 
@@ -26,6 +28,7 @@ http://wireless.kernel.org/en/developers/Regulatory/
 install -m 755 -d %{buildroot}/%crda_lib
 install -m 644 regulatory.bin %{buildroot}/%{crda_lib}/regulatory.bin
 %files
+%manifest %{name}.manifest
 %crda_lib/regulatory.bin
 %license LICENSE
 
